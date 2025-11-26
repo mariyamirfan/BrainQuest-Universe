@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrainQuest Universe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                50: '#f0f9ff',
+                100: '#e0f2fe',
+                500: '#0ea5e9',
+                600: '#0284c7',
+                900: '#0c4a6e',
+              },
+              dark: {
+                bg: '#09090b',
+                surface: '#18181b',
+                border: '#27272a'
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body { font-family: 'Inter', sans-serif; }
+      /* Custom Scrollbar for minimal look */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 3px; }
+      .dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
+
+      /* Game Engine Styles */
+      :root {
+        --bg: #fff;
+        --panel: #f8f9fb;
+        --accent: #5b6cf6;
+        --text: #0f172a;
+        --muted: #6b7280;
+        --radius: 12px;
+        --shadow: 0 6px 18px rgba(16,24,40,0.06);
+      }
+
+      [data-theme="dark"] {
+        --bg: #0b1220;
+        --panel: #0f1722;
+        --text: #e6eef8;
+        --muted: #9aa7bf;
+        --shadow: 0 8px 24px rgba(2,6,23,0.6);
+      }
+
+      .game-wrapper {
+        background: var(--panel);
+        border-radius: var(--radius);
+        padding: 16px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .game-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .game-info > div {
+        display: inline-block;
+        margin-right: 12px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .game-controls .btn {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 10px;
+        margin-left: 8px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .game-controls .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(0,0,0,0.06);
+        color: var(--text);
+      }
+
+      .game-controls .btn.link {
+        background: transparent;
+        color: var(--accent);
+        border: none;
+      }
+
+      .game-stage {
+        background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+        border-radius: 12px;
+        min-height: 380px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .game-canvas {
+        width: 800px;
+        height: 600px;
+        transform-origin: top left;
+        transition: transform 0.15s ease;
+      }
+
+      @media (max-width: 900px) {
+        .game-canvas { width: 600px; height: 450px; }
+      }
+
+      @media (max-width: 500px) {
+        .game-canvas { width: 360px; height: 270px; }
+      }
+      
+      /* Game Over Modal Styles */
+      .g-over-overlay {
+        position: absolute;
+        inset: 0;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background: rgba(2,6,23,0.5);
+        z-index: 60;
+        backdrop-filter: blur(2px);
+      }
+      .g-over-panel {
+        background: white;
+        border-radius: 16px;
+        padding: 24px;
+        width: 320px;
+        text-align: center;
+        box-shadow: 0 12px 40px rgba(2,6,23,0.3);
+      }
+      .g-over-actions { display:flex; gap:12px; justify-content:center; margin-top:16px; }
+      
+      /* Toast Styles */
+      #toast-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 100;
+        pointer-events: none;
+      }
+      .toast {
+        padding: 12px 20px;
+        border-radius: 12px;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        animation: fade-in 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+      @keyframes fade-in {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  <script type="importmap">
+
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-gray-50 text-gray-900 dark:bg-dark-bg dark:text-gray-100 transition-colors duration-300">
+    <div id="root"></div>
+    <div id="toast-container"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
